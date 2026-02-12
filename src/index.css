@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-sans antialiased text-black bg-white;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* GPU-composited CSS keyframe animations (runs on compositor thread, not main thread) */
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-12px) translateZ(0);
+    }
+}
+
+@keyframes float-medium {
+
+    0%,
+    100% {
+        transform: translateY(0) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-8px) translateZ(0);
+    }
+}
+
+@keyframes float-fast {
+
+    0%,
+    100% {
+        transform: translateY(0) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-15px) translateZ(0);
+    }
+}
+
+@keyframes float-gentle {
+
+    0%,
+    100% {
+        transform: translateY(0) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-6px) translateZ(0);
+    }
+}
+
+@keyframes float-rotate {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(5deg) translateZ(0);
+    }
+}
+
+@keyframes float-rotate-reverse {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-3deg) translateZ(0);
+    }
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg) translateZ(0);
+    }
+
+    to {
+        transform: rotate(360deg) translateZ(0);
+    }
+}
+
+@keyframes pulse-gentle {
+
+    0%,
+    100% {
+        transform: scale(1) translateZ(0);
+    }
+
+    50% {
+        transform: scale(1.05) translateZ(0);
+    }
+}
+
+@keyframes bob {
+
+    0%,
+    100% {
+        transform: translateY(0) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-10px) translateZ(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Utility classes for animations */
+.animate-float-slow {
+    animation: float-slow 4s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-float-medium {
+    animation: float-medium 2.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-float-fast {
+    animation: float-fast 3s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-float-gentle {
+    animation: float-gentle 2.8s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-float-rotate {
+    animation: float-rotate 3s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-float-rotate-reverse {
+    animation: float-rotate-reverse 2.6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+    will-change: transform;
+}
+
+.animate-pulse-gentle {
+    animation: pulse-gentle 2s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-bob {
+    animation: bob 3s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+}
+
+/* Delay utilities */
+.delay-200 {
+    animation-delay: 200ms;
+}
+
+.delay-400 {
+    animation-delay: 400ms;
+}
+
+.delay-700 {
+    animation-delay: 700ms;
+}
+
+.delay-1000 {
+    animation-delay: 1000ms;
+}
+
+/* Skeleton utilities */
+.skeleton-base {
+    @apply bg-[#F4F4F4] relative overflow-hidden;
+}
+
+.skeleton-shimmer::after {
+    content: "";
+    @apply absolute inset-0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.6),
+            transparent);
+    animation: shimmer 2s infinite;
+}
+
+/* GPU acceleration hint for animated containers */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
