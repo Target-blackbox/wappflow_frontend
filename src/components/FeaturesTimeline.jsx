@@ -2,39 +2,76 @@ import { motion, useInView, useScroll, useTransform, useSpring, AnimatePresence 
 import { useRef } from 'react'
 import Skeleton from './Skeleton'
 
-const features = [
-    {
-        title: 'Single file forwarding',
-        description:
-            'Send PDF, images, or documents via WhatsApp instantly. Perfect for invoices, reports, and confirmations. Reach your customers where they are most active.',
-        image: '/whatsapp image_website.png',
-        color: 'transparent',
-        blob: 'bg-blob-green',
-        accent: '#037312',
-        hasBg: false
-    },
-    {
-        title: 'Bulk WhatsApp Messaging',
-        description:
-            'Send messages to multiple contacts using Excel/CSV. Ideal for marketing campaigns, newsletters, and announcements. Scale your outreach effortlessly.',
-        image: '/bulk_messages.png',
-        color: 'transparent',
-        blob: 'bg-blob-pink',
-        accent: '#C62828',
-        hasBg: false
-    },
-    {
-        title: 'Auto-Reply Chatbot',
-        description:
-            'Automatically respond to incoming messages with keyword-based rules. Great for FAQs, lead qualifying, and 24/7 customer support.',
-        image: '/auto_reply chatbot.png',
-        color: 'transparent',
-        blob: 'bg-blob-blue',
-        accent: '#004CFD',
-        hasBg: false,
-        showBlob: false
-    },
-]
+const platformFeatures = {
+    'WhatsApp': [
+        {
+            title: 'Single file forwarding',
+            description: 'Send PDF, images, or documents via WhatsApp instantly. Perfect for invoices, reports, and confirmations. Reach your customers where they are most active.',
+            image: '/whatsapp image_website.png',
+            color: 'transparent',
+            blob: 'bg-blob-green',
+            accent: '#037312',
+            hasBg: false
+        },
+        {
+            title: 'Bulk WhatsApp Messaging',
+            description: 'Send messages to multiple contacts using Excel/CSV. Ideal for marketing campaigns, newsletters, and announcements. Scale your outreach effortlessly.',
+            image: '/bulk_messages.png',
+            color: 'transparent',
+            blob: 'bg-blob-pink',
+            accent: '#C62828',
+            hasBg: false
+        },
+        {
+            title: 'Auto-Reply Chatbot',
+            description: 'Automatically respond to incoming messages with keyword-based rules. Great for FAQs, lead qualifying, and 24/7 customer support.',
+            image: '/auto_reply chatbot.png',
+            color: 'transparent',
+            blob: 'bg-blob-blue',
+            accent: '#004CFD',
+            hasBg: false,
+            showBlob: false
+        },
+    ],
+    'Instagram': [
+        {
+            title: 'Comment Automation',
+            description: 'Reply to comments and send a DM to engage your followers. Boost participation and turn casual scrolls into meaningful conversations.',
+            image: '/insta_comment.jpg',
+            color: 'transparent',
+            blob: 'bg-blob-pink',
+            accent: '#E1306C',
+            hasBg: false
+        },
+        {
+            title: 'Story Automation',
+            description: 'Auto respond to story replies and reactions. Engage with your audience exactly when they show interest in your disappearing content.',
+            image: '/insta_story.png',
+            color: 'transparent',
+            blob: 'bg-blob-blue',
+            accent: '#5851DB',
+            hasBg: false
+        },
+        {
+            title: 'Live Automation',
+            description: 'Send a message to followers who are active during lives. Capitalize on the energy of real-time broadcasting to build deeper connections.',
+            image: '/insta_live_trial.png',
+            color: 'transparent',
+            blob: 'bg-blob-green',
+            accent: '#833AB4',
+            hasBg: false
+        },
+        {
+            title: 'DM Automation',
+            description: 'Automatically reply to the followers who messages you. Provide instant value and support to every direct inquiry, 24/7.',
+            image: '/insta_dm.jpg',
+            color: 'transparent',
+            blob: 'bg-blob-pink',
+            accent: '#FD1D1D',
+            hasBg: false
+        }
+    ]
+}
 
 const FeatureBlock = ({ feature, index, isLoaded }) => {
     const ref = useRef(null)
@@ -99,7 +136,7 @@ const FeatureBlock = ({ feature, index, isLoaded }) => {
                             <img
                                 src={feature.image}
                                 alt={feature.title}
-                                className="w-full h-full object-contain relative z-10 drop-shadow-2xl scale-125 md:scale-140 transform-gpu"
+                                className="w-full h-full object-contain relative z-10 drop-shadow-2xl scale-95 md:scale-100 transform-gpu"
                             />
 
                             {feature.hasBg && (
@@ -126,7 +163,7 @@ const FeatureBlock = ({ feature, index, isLoaded }) => {
 }
 
 const ComingSoon = ({ platform }) => {
-    const accentColor = platform === 'Instagram' ? '#4C1D95' : '#1E3A8A'
+    const accentColor = '#1E3A8A' // Reserved for Telegram
 
     return (
         <motion.div
@@ -220,25 +257,41 @@ const FeaturesTimeline = ({ isLoaded, activePlatform, onSignup }) => {
         restDelta: 0.001
     })
 
+    const activeFeatures = platformFeatures[activePlatform] || []
+
+    const getTimelineGradient = () => {
+        if (activePlatform === 'WhatsApp') {
+            return 'from-[#03543F] via-[#064e3b] to-[#03543F]'
+        }
+        return 'from-[#833AB4] via-[#FD1D1D] to-[#FCB045]' // Instagram Brand Gradient
+    }
+
+    const getTimelineShadow = () => {
+        if (activePlatform === 'WhatsApp') {
+            return 'shadow-[0_0_12px_rgba(3,84,63,0.3)]'
+        }
+        return 'shadow-[0_0_15px_rgba(225,48,108,0.4)]'
+    }
+
     return (
         <section ref={containerRef} className="py-12 md:py-20 bg-white overflow-hidden relative min-h-[800px]">
             <AnimatePresence mode="wait">
-                {activePlatform === 'WhatsApp' ? (
+                {activeFeatures.length > 0 ? (
                     <motion.div
-                        key="whatsapp-features"
+                        key={`${activePlatform}-features`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         {/* Dynamic Guiding Line */}
-                        <div className="absolute left-1/2 top-[440px] bottom-[180px] w-[2px] -translate-x-1/2 hidden md:block z-10">
+                        <div className="absolute left-1/2 top-[440px] bottom-[180px] w-[3px] -translate-x-1/2 hidden md:block z-10">
                             {/* Background Track */}
-                            <div className="absolute inset-0 bg-[#F4F4F4]" />
+                            <div className="absolute inset-0 bg-[#F4F4F4] rounded-full" />
                             {/* Active Filling Line */}
                             <motion.div
                                 style={{ scaleY, transformOrigin: 'top' }}
-                                className="absolute inset-0 bg-gradient-to-b from-[#03543F] via-[#064e3b] to-[#03543F] shadow-[0_0_12px_rgba(3,84,63,0.3)]"
+                                className={`absolute inset-0 bg-gradient-to-b ${getTimelineGradient()} ${getTimelineShadow()} rounded-full`}
                             />
                         </div>
 
@@ -250,19 +303,19 @@ const FeaturesTimeline = ({ isLoaded, activePlatform, onSignup }) => {
                                 viewport={{ once: true }}
                                 className="text-center mb-24 relative z-30"
                             >
-                                <div className="absolute left-1/2 -top-12 -translate-x-1/2 w-10 h-10 rounded-2xl bg-[#f0fdf4] border border-[#03543F]/10 flex items-center justify-center">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-[#03543F]" />
+                                <div className="absolute left-1/2 -top-12 -translate-x-1/2 w-10 h-10 rounded-2xl bg-black/[0.02] border border-black/5 flex items-center justify-center">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-[#2F65E3]" />
                                 </div>
                                 <h2 className="text-[13px] font-bold text-black/30 tracking-[0.3em] uppercase mb-6">Execution Suite</h2>
                                 <h3 className="text-[44px] md:text-[64px] font-black text-black leading-[1.05] tracking-tight">
-                                    Engineered for Automation. <br />
+                                    Engineering for {activePlatform}. <br />
                                     <span className="text-black/20 italic">Designed for speed.</span>
                                 </h3>
                             </motion.div>
 
                             {/* Feature Blocks */}
                             <div className="space-y-0 relative">
-                                {features.map((feature, index) => (
+                                {activeFeatures.map((feature, index) => (
                                     <FeatureBlock key={feature.title} feature={feature} index={index} isLoaded={isLoaded} />
                                 ))}
                             </div>
