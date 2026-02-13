@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Skeleton from './Skeleton'
 
-const Header = ({ isLoaded }) => {
+const Header = ({ isLoaded, onLogin, onSignup }) => {
     const [scrolled, setScrolled] = useState(false)
     const [hoveredIndex, setHoveredIndex] = useState(null)
 
@@ -102,10 +102,16 @@ const Header = ({ isLoaded }) => {
                             </div>
                         ) : (
                             <>
-                                <button className="px-5 py-2.5 text-[14px] font-medium text-black/70 hover:text-[#2F65E3] transition-colors duration-200 border border-[#D9D9D9] rounded-lg">
+                                <button
+                                    onClick={onLogin}
+                                    className="px-5 py-2.5 text-[14px] font-medium text-black/70 hover:text-[#2F65E3] transition-colors duration-200 border border-[#D9D9D9] rounded-lg cursor-pointer"
+                                >
                                     Login
                                 </button>
-                                <button className="px-5 py-2.5 text-[13px] font-semibold text-white bg-[#2F65E3] rounded-lg hover:bg-[#2555c7] transition-all duration-200">
+                                <button
+                                    onClick={onSignup}
+                                    className="px-5 py-2.5 text-[13px] font-semibold text-white bg-[#2F65E3] rounded-lg hover:bg-[#2555c7] transition-all duration-200"
+                                >
                                     Start for free
                                 </button>
                             </>

@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion'
 import { useRef } from 'react'
 import Skeleton from './Skeleton'
 
@@ -6,203 +6,296 @@ const features = [
     {
         title: 'Single file forwarding',
         description:
-            'Send PDF, images, or documents via WhatsApp instantly. Perfect for invoices, report, and confirmations.',
-        side: 'left',
-        cardBg: 'bg-[#DAF7D9]/60',
-        titleColor: 'text-[#037312]',
-        icon: (
-            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center shadow-md">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-                </svg>
-            </div>
-        ),
-        illustration: (
-            <div className="absolute -top-4 -right-4 w-28 h-28 flex items-center justify-center">
-                <div className="animate-float-gentle">
-                    <div className="w-12 h-12 bg-[#087E07] rounded-xl shadow-lg flex items-center justify-center">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        ),
+            'Send PDF, images, or documents via WhatsApp instantly. Perfect for invoices, reports, and confirmations. Reach your customers where they are most active.',
+        image: '/whatsapp image_website.png',
+        color: 'transparent',
+        blob: 'bg-blob-green',
+        accent: '#037312',
+        hasBg: false
     },
     {
         title: 'Bulk WhatsApp Messaging',
         description:
-            'Send messages to multiple contacts using Excel/CSV. Ideal for marketing campaigns and announcements.',
-        side: 'right',
-        cardBg: 'bg-[#FFD8E9]/60',
-        titleColor: 'text-[#C62828]',
-        icon: null,
-        illustration: (
-            <div className="absolute -top-6 -right-6 w-32 h-32 flex items-center justify-center">
-                <div className="animate-float-gentle delay-200">
-                    <div className="flex items-end gap-1">
-                        <div className="w-10 h-10 bg-[#087E07] rounded-xl shadow-md flex items-center justify-center">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                            </svg>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                            <div className="w-7 h-7 bg-orange-400 rounded-lg shadow-sm flex items-center justify-center">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-                                </svg>
-                            </div>
-                            <div className="w-7 h-7 bg-[#2F65E3] rounded-lg shadow-sm flex items-center justify-center">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ),
+            'Send messages to multiple contacts using Excel/CSV. Ideal for marketing campaigns, newsletters, and announcements. Scale your outreach effortlessly.',
+        image: '/bulk_messages.png',
+        color: 'transparent',
+        blob: 'bg-blob-pink',
+        accent: '#C62828',
+        hasBg: false
     },
     {
         title: 'Auto-Reply Chatbot',
         description:
-            'Automatically respond to incoming messages with keyword-based rules. Great for FAQs and support.',
-        side: 'left',
-        cardBg: 'bg-[#C5EFFF]/40',
-        titleColor: 'text-[#004CFD]',
-        icon: (
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center shadow-md">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                    <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
-                </svg>
-            </div>
-        ),
-        illustration: null,
+            'Automatically respond to incoming messages with keyword-based rules. Great for FAQs, lead qualifying, and 24/7 customer support.',
+        image: '/auto_reply chatbot.png',
+        color: 'transparent',
+        blob: 'bg-blob-blue',
+        accent: '#004CFD',
+        hasBg: false,
+        showBlob: false
     },
 ]
 
-const FeatureCard = ({ feature, index, isLoaded }) => {
+const FeatureBlock = ({ feature, index, isLoaded }) => {
     const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: '-50px' })
+    const isInView = useInView(ref, { once: true, margin: '-10% 0px -10% 0px' })
+
+    const isEven = index % 2 === 0
 
     return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: feature.side === 'left' ? -30 : 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: index * 0.1, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className={`relative flex ${feature.side === 'left' ? 'justify-start' : 'justify-end'
-                } mb-20`}
-        >
-            {!isLoaded ? (
-                <div className="w-full max-w-[380px] p-7 rounded-2xl bg-[#F4F4F4]/50 border border-black/5">
-                    <Skeleton className="w-16 h-16 mb-4" />
-                    <Skeleton className="h-6 w-2/3 mb-2" />
-                    <Skeleton className="h-4 w-full mb-1" />
-                    <Skeleton className="h-4 w-5/6" />
-                </div>
-            ) : (
-                <div
-                    className={`relative ${feature.cardBg} backdrop-blur-sm p-7 rounded-2xl shadow-sm max-w-[380px] border border-white/50 hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300 ease-out gpu-accelerated`}
+        <div ref={ref} className="relative py-32 md:py-48 overflow-visible">
+            {/* Background Blob Decorations */}
+            {feature.showBlob !== false && (
+                <div className={`bg-blob ${feature.blob} ${isEven ? '-left-20' : '-right-20'} top-1/2 -translate-y-1/2 opacity-10`} />
+            )}
+
+            <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-16 md:gap-24`}>
+                {/* Text Content */}
+                <motion.div
+                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
+                    className="flex-1 space-y-6 md:px-8"
                 >
-                    {feature.icon && <div className="mb-4">{feature.icon}</div>}
-                    <h3 className={`text-lg font-bold ${feature.titleColor} mb-2`}>
-                        {feature.title}
-                    </h3>
-                    <p className="text-[13px] text-black/50 leading-relaxed">
-                        {feature.description}
-                    </p>
-                    {feature.illustration}
-                </div>
-            )}
-        </motion.div>
-    )
-}
-
-const RobotIllustration = ({ isLoaded }) => {
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: '-50px' })
-
-    return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex justify-end mb-16"
-        >
-            {!isLoaded ? (
-                <Skeleton className="w-32 h-48 rounded-2xl" />
-            ) : (
-                <div className="animate-bob">
-                    <div className="relative">
-                        <div className="w-32 h-36 relative">
-                            <div className="w-24 h-20 bg-gradient-to-b from-[#C5EFFF] to-[#90CAF9] rounded-2xl mx-auto relative border-2 border-[#90CAF9]">
-                                <div className="absolute top-5 left-4 w-4 h-4 bg-[#004CFD] rounded-full">
-                                    <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 bg-white rounded-full"></div>
-                                </div>
-                                <div className="absolute top-5 right-4 w-4 h-4 bg-[#004CFD] rounded-full">
-                                    <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 bg-white rounded-full"></div>
-                                </div>
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-1 h-4 bg-[#90CAF9]"></div>
-                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#2F65E3] rounded-full"></div>
-                            </div>
-                            <div className="w-20 h-14 bg-gradient-to-b from-[#C5EFFF] to-[#90CAF9] rounded-xl mx-auto -mt-1 border-2 border-[#64B5F6] flex items-center justify-center">
-                                <div className="grid grid-cols-2 gap-1">
-                                    <div className="w-2 h-2 bg-[#004CFD] rounded-full"></div>
-                                    <div className="w-2 h-2 bg-[#004CFD] rounded-full"></div>
-                                    <div className="w-2 h-2 bg-[#2F65E3] rounded-full"></div>
-                                    <div className="w-2 h-2 bg-[#2F65E3] rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="absolute -right-10 top-0 bg-white px-3 py-1.5 rounded-xl shadow-md text-[10px] text-black/50 font-medium border border-[#D9D9D9] animate-pulse-gentle">
-                            Hi! 👋
-                        </div>
-                    </div>
-                </div>
-            )}
-        </motion.div>
-    )
-}
-
-const FeaturesTimeline = ({ isLoaded }) => {
-    return (
-        <section id="features" className="py-24 bg-white">
-            <div className="max-w-[1000px] mx-auto px-16 relative">
-                <div className="absolute left-1/2 top-16 bottom-32 -translate-x-1/2 border-l-2 border-dashed border-[#D9D9D9]"></div>
-                <div className="absolute left-1/2 top-16 w-3 h-3 bg-[#2F65E3] rounded-full -translate-x-1/2 shadow-sm"></div>
-                <div className="absolute left-1/2 bottom-32 w-3 h-3 bg-[#2F65E3] rounded-full -translate-x-1/2 shadow-sm"></div>
-
-                <div className="grid grid-cols-2 gap-x-24 gap-y-0 pt-8">
-                    <div className="pt-8">
-                        <FeatureCard feature={features[0]} index={0} isLoaded={isLoaded} />
-                    </div>
-                    <div className="pt-8"></div>
-                    <div></div>
-                    <div>
-                        <FeatureCard feature={features[1]} index={1} isLoaded={isLoaded} />
-                    </div>
-                    <div>
-                        <FeatureCard feature={features[2]} index={2} isLoaded={isLoaded} />
-                    </div>
-                    <div>
-                        <RobotIllustration isLoaded={isLoaded} />
-                    </div>
-                </div>
-
-                <div className="text-center mt-8">
                     {!isLoaded ? (
-                        <div className="flex justify-center">
-                            <Skeleton className="h-12 w-40" />
+                        <div className="space-y-4">
+                            <Skeleton className="h-12 w-3/4 mb-4" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-5/6" />
+                            <Skeleton className="h-4 w-4/5" />
                         </div>
                     ) : (
-                        <button className="px-7 py-3 text-[14px] font-semibold text-white bg-[#2F65E3] rounded-xl shadow-[0_4px_16px_rgba(47,101,227,0.3)] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-                            Start for free
-                        </button>
+                        <>
+                            <div className="inline-block px-4 py-1.5 rounded-full bg-white/50 border border-black/5 text-[12px] font-bold tracking-wider uppercase backdrop-blur-sm shadow-sm" style={{ color: feature.accent }}>
+                                Feature 0{index + 1}
+                            </div>
+                            <h2 className="text-[42px] md:text-[52px] font-black leading-[1.1] text-black">
+                                {feature.title}
+                            </h2>
+                            <p className="text-[18px] text-black/50 leading-relaxed max-w-[500px]">
+                                {feature.description}
+                            </p>
+                            <div className="pt-4">
+                                <button className="group flex items-center gap-2 text-[15px] font-bold text-black border-b-2 border-black/10 hover:border-black transition-all duration-300 pb-1">
+                                    Explore More
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </>
+                    )}
+                </motion.div>
+
+                {/* Illustration - Static & Enlarged */}
+                <div className="flex-[1.2] relative">
+                    {!isLoaded ? (
+                        <Skeleton className="w-full aspect-square rounded-3xl" />
+                    ) : (
+                        <div className={`relative w-full aspect-[4/3] ${feature.hasBg ? `rounded-[40px] bg-gradient-to-br ${feature.color} p-12 shadow-2xl border border-white/40` : ''} overflow-visible group flex items-center justify-center`}>
+                            {feature.hasBg && <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px] pointer-events-none rounded-[40px]" />}
+
+                            <img
+                                src={feature.image}
+                                alt={feature.title}
+                                className="w-full h-full object-contain relative z-10 drop-shadow-2xl scale-125 md:scale-140 transform-gpu"
+                            />
+
+                            {feature.hasBg && (
+                                <>
+                                    <div className={`absolute top-10 ${isEven ? 'right-10' : 'left-10'} w-24 h-24 bg-white/20 rounded-full blur-2xl`} />
+                                    <div className={`absolute bottom-10 ${isEven ? 'left-10' : 'right-10'} w-32 h-32 bg-white/20 rounded-full blur-3xl`} />
+                                </>
+                            )}
+                        </div>
                     )}
                 </div>
             </div>
+
+            {/* Connection Node */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none hidden md:flex">
+                <motion.div
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : {}}
+                    className="w-4 h-4 rounded-full bg-white border-4 border-[#2F65E3] shadow-lg"
+                />
+            </div>
+        </div>
+    )
+}
+
+const ComingSoon = ({ platform }) => {
+    const accentColor = platform === 'Instagram' ? '#4C1D95' : '#1E3A8A'
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="py-12 md:py-24 max-w-[1240px] mx-auto px-6"
+        >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] overflow-visible">
+                {/* Main Teaser Card */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="md:col-span-2 md:row-span-2 relative p-12 rounded-[48px] overflow-hidden group border border-white/20 bg-white/40 shadow-xl backdrop-blur-3xl"
+                >
+                    <div className="absolute -right-20 -top-20 w-96 h-96 blur-[120px] opacity-20 pointer-events-none" style={{ backgroundColor: accentColor }} />
+                    <div className="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                            <div className="inline-block px-4 py-2 rounded-full bg-white/50 border border-black/5 text-[12px] font-bold tracking-[0.2em] uppercase mb-8" style={{ color: accentColor }}>
+                                Platform Expansion
+                            </div>
+                            <h2 className="text-[48px] md:text-[72px] font-black text-black leading-[1.1] mb-6">
+                                {platform} <br />
+                                <span className="text-black/20 italic">is coming soon.</span>
+                            </h2>
+                            <p className="text-[18px] text-black/50 leading-relaxed max-w-[450px]">
+                                We're meticulously building {platform} support to ensure the highest reliability and speed for your business automations.
+                            </p>
+                        </div>
+                        <div className="flex gap-4">
+                            <button className="px-10 py-5 bg-[#2F65E3] text-white rounded-[24px] font-bold shadow-[0_20px_40px_rgba(47,101,227,0.25)] hover:bg-[#2555c7] hover:-translate-y-2 transition-all duration-300">
+                                Pre-Register Now
+                            </button>
+                            <button className="px-10 py-5 bg-white border border-black/10 text-black rounded-[24px] font-bold hover:bg-black/5 transition-all duration-300">
+                                Explore Alpha
+                            </button>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Shrouded Preview 1 */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="relative rounded-[40px] border border-white/30 overflow-hidden bg-white/40 shadow-xl backdrop-blur-2xl p-8"
+                >
+                    <div className="absolute inset-0 grayscale contrast-[150%] opacity-20 pointer-events-none"
+                        style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(0,0,0,0.2) 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+                    <div className="relative z-10">
+                        <div className="w-12 h-12 rounded-2xl mb-6 flex items-center justify-center bg-white/50 border border-white">
+                            <span className="text-2xl">⚡</span>
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">Automated Flows</h3>
+                        <p className="text-sm text-black/40 leading-relaxed">Multi-step sequences designed specifically for {platform}'s unique API.</p>
+                    </div>
+                    <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-black/5 rounded-full blur-2xl" />
+                </motion.div>
+
+                {/* Shrouded Preview 2 */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="relative rounded-[40px] border border-white/30 overflow-hidden bg-white/40 shadow-xl backdrop-blur-2xl p-8"
+                >
+                    <div className="relative z-10">
+                        <div className="w-12 h-12 rounded-2xl mb-6 flex items-center justify-center bg-white/50 border border-white">
+                            <span className="text-2xl">🔗</span>
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">Direct Integration</h3>
+                        <p className="text-sm text-black/40 leading-relaxed">No third-party wrappers. Direct, low-latency connection to your backend.</p>
+                    </div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full blur-3xl opacity-10" style={{ backgroundColor: accentColor }} />
+                </motion.div>
+
+            </div>
+        </motion.div>
+    )
+}
+
+const FeaturesTimeline = ({ isLoaded, activePlatform, onSignup }) => {
+    const containerRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start center", "end center"]
+    })
+
+    const scaleY = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    })
+
+    return (
+        <section ref={containerRef} className="py-12 md:py-20 bg-white overflow-hidden relative min-h-[800px]">
+            <AnimatePresence mode="wait">
+                {activePlatform === 'WhatsApp' ? (
+                    <motion.div
+                        key="whatsapp-features"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        {/* Dynamic Guiding Line */}
+                        <div className="absolute left-1/2 top-[440px] bottom-[180px] w-[2px] -translate-x-1/2 hidden md:block z-10">
+                            {/* Background Track */}
+                            <div className="absolute inset-0 bg-[#F4F4F4]" />
+                            {/* Active Filling Line */}
+                            <motion.div
+                                style={{ scaleY, transformOrigin: 'top' }}
+                                className="absolute inset-0 bg-gradient-to-b from-[#03543F] via-[#064e3b] to-[#03543F] shadow-[0_0_12px_rgba(3,84,63,0.3)]"
+                            />
+                        </div>
+
+                        <div className="max-w-[1440px] mx-auto px-6 md:px-24 relative z-20">
+                            {/* Section Header */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="text-center mb-24 relative z-30"
+                            >
+                                <div className="absolute left-1/2 -top-12 -translate-x-1/2 w-10 h-10 rounded-2xl bg-[#f0fdf4] border border-[#03543F]/10 flex items-center justify-center">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-[#03543F]" />
+                                </div>
+                                <h2 className="text-[13px] font-bold text-black/30 tracking-[0.3em] uppercase mb-6">Execution Suite</h2>
+                                <h3 className="text-[44px] md:text-[64px] font-black text-black leading-[1.05] tracking-tight">
+                                    Engineered for Automation. <br />
+                                    <span className="text-black/20 italic">Designed for speed.</span>
+                                </h3>
+                            </motion.div>
+
+                            {/* Feature Blocks */}
+                            <div className="space-y-0 relative">
+                                {features.map((feature, index) => (
+                                    <FeatureBlock key={feature.title} feature={feature} index={index} isLoaded={isLoaded} />
+                                ))}
+                            </div>
+
+                            {/* Bottom CTA */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="text-center mt-32 relative z-50"
+                            >
+                                {!isLoaded ? (
+                                    <div className="flex justify-center">
+                                        <Skeleton className="h-16 w-56 rounded-2xl" />
+                                    </div>
+                                ) : (
+                                    <div className="relative inline-block group">
+                                        <div className="absolute inset-x-[-20%] inset-y-[-20%] bg-black/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                                        <button
+                                            onClick={onSignup}
+                                            className="relative z-10 px-14 py-6 text-[18px] font-black text-white bg-[#2F65E3] rounded-[28px] shadow-[0_20px_40px_rgba(47,101,227,0.25)] hover:shadow-[0_30px_60px_rgba(47,101,227,0.4)] hover:-translate-y-2 transition-all duration-300 cursor-pointer active:scale-95"
+                                        >
+                                            Start for free
+                                        </button>
+                                    </div>
+                                )}
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                ) : (
+                    <ComingSoon key={activePlatform} platform={activePlatform} />
+                )}
+            </AnimatePresence>
         </section>
     )
 }

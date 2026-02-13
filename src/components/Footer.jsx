@@ -63,7 +63,13 @@ const Footer = ({ isLoaded }) => {
                                     </>
                                 ) : (
                                     ['Home', 'Features', 'How it works', 'Pricing'].map((item) => (
-                                        <a key={item} href="#" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">{item}</a>
+                                        <a
+                                            key={item}
+                                            href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                            className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors"
+                                        >
+                                            {item}
+                                        </a>
                                     ))
                                 )}
                             </div>
@@ -99,7 +105,7 @@ const Footer = ({ isLoaded }) => {
                         backgroundClip: 'text',
                     }}
                 >
-                    KODRIX AI
+                    KODRYX AI
                 </div>
             </div>
         </footer>

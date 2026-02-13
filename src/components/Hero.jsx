@@ -23,7 +23,7 @@ const testimonials = [
     },
 ]
 
-const Hero = ({ isLoaded, setIsLoaded }) => {
+const Hero = ({ isLoaded, setIsLoaded, onSignup }) => {
     const { scrollY } = useScroll()
 
     // Parallax Transforms
@@ -74,7 +74,10 @@ const Hero = ({ isLoaded, setIsLoaded }) => {
                                 </p>
 
                                 <div className="flex gap-3 mb-10">
-                                    <button className="px-7 py-3 text-[14px] font-semibold text-white bg-[#2F65E3] rounded-lg shadow-[0_4px_12px_rgba(47,101,227,0.3)] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                                    <button
+                                        onClick={onSignup}
+                                        className="px-7 py-3 text-[14px] font-semibold text-white bg-[#2F65E3] rounded-lg shadow-[0_4px_12px_rgba(47,101,227,0.3)] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                                    >
                                         Start for free
                                     </button>
                                     <button className="px-7 py-3 text-[14px] font-semibold text-black border border-[#D9D9D9] rounded-lg hover:bg-[#F8F8F8] transition-all duration-200">
