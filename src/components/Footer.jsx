@@ -77,17 +77,23 @@ const Footer = ({ isLoaded }) => {
                         <div>
                             <h4 className="text-[14px] font-bold text-black mb-4">Services</h4>
                             <div className="flex flex-col gap-2.5">
-                                {['Cyber Security', 'Services', 'AI Training'].map((item) => (
-                                    <a key={item} href="#" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">{item}</a>
-                                ))}
+                                <a href="https://kodryx.ai/cyber-security-services/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">
+                                    Cyber Security Services
+                                </a>
+                                <a href="https://kodryx.ai/ai-training/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">
+                                    AI Training
+                                </a>
                             </div>
                         </div>
                         <div>
                             <h4 className="text-[14px] font-bold text-black mb-4">Resources</h4>
                             <div className="flex flex-col gap-2.5">
-                                {['Blog', 'Brochure'].map((item) => (
-                                    <a key={item} href="#" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">{item}</a>
-                                ))}
+                                <a href="https://kodryx.ai/blog/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">
+                                    Blog
+                                </a>
+                                <a href="https://kodryx.ai/brochure/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">
+                                    Brochure
+                                </a>
                             </div>
                         </div>
                     </div>
