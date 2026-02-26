@@ -23,7 +23,7 @@ function App() {
     }
 
     if (view === 'login') {
-        return <LoginPage isLoaded={isLoaded} setIsLoaded={setIsLoaded} onBack={() => handleSetView('main')} />
+        return <LoginPage isLoaded={isLoaded} setIsLoaded={setIsLoaded} onBack={() => handleSetView('main')} onSignup={() => handleSetView('signup')} />
     }
 
     if (view === 'signup') {
