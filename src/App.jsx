@@ -41,7 +41,7 @@ function App() {
         <div className="min-h-screen bg-white">
             <Header isLoaded={isLoaded} onLogin={() => handleSetView('login')} onSignup={() => handleSetView('signup')} />
             <main className="relative">
-                <Hero isLoaded={isLoaded} setIsLoaded={setIsLoaded} onSignup={() => handleSetView('signup')} />
+                <Hero isLoaded={isLoaded} setIsLoaded={setIsLoaded} onSignup={() => handleSetView('signup')} setActivePlatform={setActivePlatform} />
                 <PlatformSections
                     isLoaded={isLoaded}
                     activePlatform={activePlatform}

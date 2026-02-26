@@ -80,7 +80,7 @@ const FeatureBlock = ({ feature, index, isLoaded }) => {
     const isEven = index % 2 === 0
 
     return (
-        <div ref={ref} className="relative py-32 md:py-48 overflow-visible">
+        <div ref={ref} className="relative py-12 md:py-16 overflow-visible">
             {/* Background Blob Decorations */}
             {feature.showBlob !== false && (
                 <div className={`bg-blob ${feature.blob} ${isEven ? '-left-20' : '-right-20'} top-1/2 -translate-y-1/2 opacity-10`} />
@@ -322,6 +322,7 @@ const FeaturesTimeline = ({ isLoaded, activePlatform, onSignup }) => {
 
                             {/* Bottom CTA */}
                             <motion.div
+                                id="features-cta"
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}

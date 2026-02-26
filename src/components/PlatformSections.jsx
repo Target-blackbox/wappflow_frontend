@@ -57,7 +57,7 @@ const PlatformSections = ({ isLoaded, activePlatform, setActivePlatform }) => {
     const activeData = platformData.find(p => p.name === activePlatform) || platformData[0]
 
     return (
-        <section id="features" className="relative py-16 md:py-24 bg-white bg-grain overflow-hidden flex items-center justify-center">
+        <section id="features" className="relative py-10 md:py-14 bg-white bg-grain overflow-hidden flex items-center justify-center">
             {/* Morphing Atmospheric Lighting */}
             <AnimatePresence mode="wait">
                 <motion.div

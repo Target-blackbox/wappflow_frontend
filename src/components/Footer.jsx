@@ -45,7 +45,7 @@ const Footer = ({ isLoaded }) => {
                         </div>
 
                         <p className="text-[12px] text-[#999999]">
-                            © 2025 Kodrix AI. All rights reserved.
+                            © 2025 Kodryx AI. All rights reserved.
                         </p>
                     </div>
 
@@ -80,9 +80,7 @@ const Footer = ({ isLoaded }) => {
                                 <a href="https://kodryx.ai/cyber-security-services/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">
                                     Cyber Security Services
                                 </a>
-                                <a href="https://kodryx.ai/ai-training/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-black/50 hover:text-[#2F65E3] transition-colors">
-                                    AI Training
-                                </a>
+
                             </div>
                         </div>
                         <div>
